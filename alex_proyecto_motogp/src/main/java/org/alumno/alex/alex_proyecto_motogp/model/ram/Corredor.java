@@ -5,12 +5,9 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.Getter;
 import lombok.Setter;
 
+@Getter
+@Setter
 public class Corredor {
-	
-	@Getter
-	@Setter
-	
-	
 	private int id;
 	private MultipartFile imagenPiloto;
 	private String nombre;
@@ -22,11 +19,11 @@ public class Corredor {
 	private String motoActual;
 	
 	
-	public Corredor(int id, MultipartFile imagenPiloto, String nombre, int dorsal, String equipo, String nacionalidad,
+	public Corredor(int id, String nombre, int dorsal, String equipo, String nacionalidad,
 			int edad, String estadoFisico, String motoActual) {
 		super();
 		this.id = id;
-		this.imagenPiloto = imagenPiloto;
+//		this.imagenPiloto = imagenPiloto;
 		this.nombre = nombre;
 		this.dorsal = dorsal;
 		this.equipo = equipo;
@@ -35,6 +32,17 @@ public class Corredor {
 		this.estadoFisico = estadoFisico;
 		this.motoActual = motoActual;
 	}
+
+
+	public Corredor(int id, String nombre, int dorsal, String nacionalidad) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.dorsal = dorsal;
+		this.nacionalidad = nacionalidad;
+	}
+	
+	
 	
 	
 	

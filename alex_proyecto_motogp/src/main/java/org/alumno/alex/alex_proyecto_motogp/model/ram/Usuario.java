@@ -5,7 +5,11 @@ import java.util.Objects;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class Usuario {
 	@NotBlank(message = "El nickname no puede estar en blanco")
 	@Size(min = 5, message = "El nickname debe tener al menos 5 caracteres")
@@ -34,46 +38,6 @@ public class Usuario {
 			return false;
 		Usuario other = (Usuario) obj;
 		return Objects.equals(nickname, other.nickname);
-	}
-
-	public String getNickname() {
-		return nickname;
-	}
-
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getNombreFicheroConImagen() {
-		return nombreFicheroConImagen;
-	}
-
-	public void setNombreFicheroConImagen(String nombreFicheroConImagen) {
-		this.nombreFicheroConImagen = nombreFicheroConImagen;
-	}
-
-	public String getUser() {
-		return user;
-	}
-
-	public void setUser(String user) {
-		this.user = user;
 	}
 
 	public Usuario(String nombre, String nickname, String password) {

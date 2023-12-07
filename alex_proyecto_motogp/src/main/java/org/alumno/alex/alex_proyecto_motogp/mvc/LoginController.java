@@ -34,8 +34,11 @@ public class LoginController {
 	}
 	
 	@PostMapping("login")
-	public String loginPost(@Valid Usuario usuario, BindingResult bindingResult, ModelMap model) {
+	public String loginPost(Usuario usuario, BindingResult bindingResult, ModelMap model) {
+		System.out.println("Pepa");
 		if (bindingResult.hasErrors()) {
+			System.out.println("Pepe");
+			System.out.println(bindingResult);
             return "login";
         }
 		if(servicioLogin.usuarioValido(usuario)) {
@@ -46,6 +49,7 @@ public class LoginController {
 			model.put("usuario", usuario);
 			return "redirect:list-corredores";
 		}else {
+			System.out.println("Pepe");
 			model.put("errores", "El usuario introducido no existe o contraseña incorrecta");
 			//servicioErrores.anadirLogError(new LogError(servicioErrores.saberUltimoId() + 1,"Login incorrecto" ,"Login incorrecto de: "+usuario.getNickname()));
 			return "login";

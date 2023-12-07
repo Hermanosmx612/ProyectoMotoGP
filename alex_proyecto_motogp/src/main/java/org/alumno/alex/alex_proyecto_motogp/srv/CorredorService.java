@@ -13,7 +13,9 @@ import lombok.Setter;
 public class CorredorService {
 	@Getter
 	@Setter
-	List<Corredor> corredores = new ArrayList<Corredor>();
+	public static List<Corredor> corredores = new ArrayList<Corredor>();
 	
-	
+	static {
+		corredores.add(new Corredor(0, "Marc Marquez", 93, "España"));
+	}
 }
