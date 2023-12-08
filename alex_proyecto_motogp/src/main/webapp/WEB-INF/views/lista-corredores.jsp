@@ -3,7 +3,7 @@
 <%@ include file="../jspf/header.jspf"%>
 <%@ include file="../jspf/menuSuperior.jspf"%>
 <div class="container">
-	<h1><%-- <spring:message code="alumnos.titulo" /> --%>Lista corredores:</h1>
+	<h1><%-- <spring:message code="alumnos.titulo" /> --%>Lista pilotos:</h1>
 	<%-- <p>Bienvenido ${nickname}</p> --%>
 	<p style="color:red">${errores}</p>
 	<%-- <mvc:form method="post" action="filtrar-alumno" modelAttribute="filtroAlumno">
@@ -30,12 +30,17 @@
 
 	<table class="table table-stripped">
 		<thead>
-			<th><a class="nav-link " href="list-alumno?orden=nombre">Id<%-- <spring:message code="etiqueta.nombre" /> --%>
+			 <th><a class="nav-link " href="list-alumno?orden=nombre">Imagen<%-- <spring:message code="etiqueta.nombre" />  --%>
+		
+			<th><a class="nav-link " href="list-alumno?orden=nombre">Numero de Licencia<%-- <spring:message code="etiqueta.nombre" /> --%>
 			</a></th>
 			<th><a class="nav-link " href="list-alumno?orden=dni">Nombre<%-- <spring:message code="etiqueta.dni" /> --%></a></th>
 
 
 			<th><a class="nav-link " href="list-alumno?orden=edad">Dorsal<%-- <spring:message code="etiqueta.edad" /> --%>
+			</a></th>
+			
+			<th><a class="nav-link " href="list-alumno?orden=modulo">Equipo<%-- <spring:message code="etiqueta.ciclo" /> --%>
 			</a></th>
 
 			<th><a class="nav-link " href="list-alumno?orden=modulo">Nacionalidad<%-- <spring:message code="etiqueta.ciclo" /> --%>
@@ -45,9 +50,11 @@
 		<thead>
 			<c:forEach items="${corredoresList}" var="corredor">
 				<tr>
-					<td>${corredor.getId()}</td>
+					<td><img src="imagenPilotos/${corredor.getNumLicencia()}" class="rounded-circle" style="width:50px; height:50px; float: left; margin-right: 10px;"></td>
+					<td>${corredor.getNumLicencia()}</td>
 					<td>${corredor.getNombre()}</td>
 					<td>${corredor.getDorsal()}</td>
+					<td>${corredor.getEquipo()}</td>
 					<td>${corredor.getNacionalidad()}</td>
 					<%-- <td><input type="checkbox" ${alumno.getErasmusChecked()}
 						disabled="disabled"></td>

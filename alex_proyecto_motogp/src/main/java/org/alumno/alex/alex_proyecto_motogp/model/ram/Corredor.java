@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Corredor {
-	private int id;
+	private int numLicencia;
 	private MultipartFile imagenPiloto;
 	private String nombre;
 	private int dorsal;
@@ -17,12 +17,12 @@ public class Corredor {
 	private int edad;
 	private String estadoFisico;
 	private String motoActual;
+	private String nombreFicheroConImagen;
 	
 	
-	public Corredor(int id, String nombre, int dorsal, String equipo, String nacionalidad,
+	public Corredor( String nombre, int dorsal, String equipo, String nacionalidad,
 			int edad, String estadoFisico, String motoActual) {
 		super();
-		this.id = id;
 //		this.imagenPiloto = imagenPiloto;
 		this.nombre = nombre;
 		this.dorsal = dorsal;
@@ -34,13 +34,18 @@ public class Corredor {
 	}
 
 
-	public Corredor(int id, String nombre, int dorsal, String nacionalidad) {
+	public Corredor(int numLicencia, String nombre, int dorsal, String equipo, String nacionalidad) {
 		super();
-		this.id = id;
+		this.numLicencia = numLicencia;
 		this.nombre = nombre;
 		this.dorsal = dorsal;
+		this.equipo = equipo;
 		this.nacionalidad = nacionalidad;
+		nombreFicheroConImagen = "Desconocido.jpg";
 	}
+
+
+	
 	
 	
 	

@@ -16,6 +16,16 @@ public class CorredorService {
 	public static List<Corredor> corredores = new ArrayList<Corredor>();
 	
 	static {
-		corredores.add(new Corredor(0, "Marc Marquez", 93, "España"));
+		corredores.add(new Corredor(111111111, "Marc Marquez", 93,"Gresini Racing","España"));
+		corredores.add(new Corredor(111111112, "Bin Laden", 911,"Honda","New York"));
+	}
+	
+	public Corredor encontrarPilotoLicencia(String numLicencia) {
+		for(Corredor pil : corredores) {
+			if(pil.getNumLicencia() == (Integer.parseInt(numLicencia))) {
+				return pil;
+			}
+		}
+		return null;
 	}
 }
