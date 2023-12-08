@@ -1,6 +1,7 @@
 package org.alumno.alex.alex_proyecto_motogp.mvc;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.alumno.alex.alex_proyecto_motogp.model.dto.CorredorEdit;
 import org.alumno.alex.alex_proyecto_motogp.model.ram.Corredor;
@@ -8,6 +9,7 @@ import org.alumno.alex.alex_proyecto_motogp.model.ram.ImagenPiloto;
 import org.alumno.alex.alex_proyecto_motogp.model.ram.Usuario;
 import org.alumno.alex.alex_proyecto_motogp.srv.CorredorService;
 import org.alumno.alex.alex_proyecto_motogp.srv.FileService;
+import org.alumno.alex.alex_proyecto_motogp.srv.excepciones.PilotoDuplicadoException;
 import org.alumno.alex.alex_proyecto_motogp.srv.mapper.PilotoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -127,5 +130,39 @@ public class CorredorController {
 	public String addPiloto(ModelMap model) {
 		model.addAttribute("corredorEdit", new CorredorEdit());
 		return "add-piloto";
+	}
+	
+	@ModelAttribute("listaFisico")
+	public List<String> getEstadoFisico() {
+//		List<String> i18nlista = i18nService.getTraduccion(servicioAlumno.listGeneros());
+//		return i18nlista;
+		
+		List<String> listaFisico = servicioCorredores.listFisico();
+		return listaFisico;
+	}
+	
+	@PostMapping("add-piloto")
+	public String addPilot(ModelMap model, @Valid CorredorEdit pilotoEdit, BindingResult validaciones) {
+		System.out.println("Pepe");
+		if(validaciones.hasErrors()) {
+			//model.addAttribute("corredorEdit", new CorredorEdit());
+			return "add-piloto";
+		}
+		try {
+			if(servicioCorredores.comprobarSiExiste(pilotoEdit.getNumLicencia())) {
+				Corredor existente = servicioCorredores.encontrarPilotoLicencia(pilotoEdit.getNumLicencia() + "");
+				throw new PilotoDuplicadoException(existente, pilotoEdit);
+			}else {
+				servicioCorredores.addPiloto(pilotoEdit);
+				return "redirect:list-corredores";
+			}
+		}catch(PilotoDuplicadoException e) {
+			System.out.println("Error: " + e.toString());
+			model.addAttribute("error", e.toString());
+			return "add-piloto";
+		}
+		
+		
+	
 	}
 }

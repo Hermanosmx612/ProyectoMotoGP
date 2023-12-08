@@ -3,7 +3,9 @@ package org.alumno.alex.alex_proyecto_motogp.srv;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.alumno.alex.alex_proyecto_motogp.model.dto.CorredorEdit;
 import org.alumno.alex.alex_proyecto_motogp.model.ram.Corredor;
+import org.alumno.alex.alex_proyecto_motogp.srv.mapper.PilotoMapper;
 import org.springframework.stereotype.Service;
 
 import lombok.Getter;
@@ -31,5 +33,29 @@ public class CorredorService {
 			}
 		}
 		return null;
+	}
+	
+	public List<String> listFisico() {
+		List<String> listGeneros = new ArrayList<String>();
+		listGeneros.removeAll(listGeneros);
+		listGeneros.add("Fit");
+		listGeneros.add("Unfit");
+		return listGeneros;
+
+	}
+	
+	
+	public boolean comprobarSiExiste(int numLicencia) {
+		for(Corredor pilot : corredores) {
+			if(pilot.getNumLicencia() == numLicencia) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
+	public void addPiloto(CorredorEdit piloto) {
+		corredores.add(PilotoMapper.INSTANCE.corredorEditToCorredor(piloto));
 	}
 }

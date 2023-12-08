@@ -4,19 +4,18 @@
 <%@ include file="../jspf/menuSuperior.jspf"%>
 
 <div class="container">
+	
+	<h1>Add piloto<%-- <spring:message code="alumno.nuevo.titulo" /> --%>:</h1>
 	<p style="color: red;">${error}</p>
 
-	<h1>Add piloto<%-- <spring:message code="alumno.nuevo.titulo" /> --%>:</h1>
-
-	<p>Nuevo Piloto<%-- <spring:message code="alumno.nuevo.explicacion" /> --%>:</p>
-	<mvc:form action="add-alumno" method="post" modelAttribute="corredorEdit">
+	<mvc:form action="add-piloto" method="post" modelAttribute="corredorEdit">
 		<mvc:errors path="*" cssClass="text-warning"></mvc:errors>
 		<div class="form-row">
 			<div class="col">
 				<mvc:label path="numLicencia">Numero de licencia<%-- <spring:message code="etiqueta.dni" /> --%>:</mvc:label>
 
-				<mvc:input type="text" path="numLicencia" required="required"
-					class="form-control" />
+				<mvc:input type="number" path="numLicencia" required="required"
+					class="form-control" min = "111111111" max="999999999"/>
 				<mvc:errors path="numLicencia" cssClass="text-warning"></mvc:errors>
 			</div>
 			<div class="col">
@@ -25,27 +24,54 @@
 					class="form-control" />
 				<mvc:errors path="nombre" cssClass="text-warning"></mvc:errors>
 			</div>
-		<%-- </div>
-		<div class="form-row">
+			</div>
+		 <div class="form-row">
 			<div class="col">
-				<mvc:label path="edad"><spring:message code="etiqueta.edad" />:</mvc:label>
-				<mvc:input type="number" path="edad" class="form-control" />
-				<mvc:errors path="edad" cssClass="text-warning"></mvc:errors>
+				<mvc:label path="dorsal">Dorsal<%-- <spring:message code="etiqueta.edad" /> --%>:</mvc:label>
+				<mvc:input type="number" path="dorsal" class="form-control" min = "1" max = "99"/>
+				<mvc:errors path="dorsal" cssClass="text-warning"></mvc:errors>
 			</div>
 			<div class="col">
-				<mvc:label path="modulo"><spring:message code="etiqueta.ciclo" />:</mvc:label>
-				<mvc:input type="text" path="modulo" class="form-control" />
-				<mvc:errors path="modulo" cssClass="text-warning"></mvc:errors>
+				<mvc:label path="equipo">Equipo<%-- <spring:message code="etiqueta.ciclo" /> --%>:</mvc:label>
+				<mvc:input type="text" path="equipo" class="form-control" />
+				<mvc:errors path="equipo" cssClass="text-warning"></mvc:errors>
 			</div>
 			<div class="col">
-				<mvc:label path="curso"><spring:message code="etiqueta.curso" />:</mvc:label>
-				<mvc:input type="number" path="curso" class="form-control" />
-				<mvc:errors path="curso" cssClass="text-warning"></mvc:errors>
+				<mvc:label path="nacionalidad">Nacionalidad<%-- <spring:message code="etiqueta.curso" /> --%>:</mvc:label>
+				<mvc:input type="text" path="nacionalidad" class="form-control" />
+				<mvc:errors path="nacionalidad" cssClass="text-warning"></mvc:errors>
 
 			</div>
 		</div>
 		<br>
+		<br>
+		
 		<div class="form-row">
+			<div class="col">
+				<mvc:label path="edad">Edad<%-- <spring:message code="etiqueta.edad" /> --%>:</mvc:label>
+				<mvc:input type="number" path="dorsal" class="form-control" min = "1" max = "99"/>
+				<mvc:errors path="edad" cssClass="text-warning"></mvc:errors>
+			</div>
+			<div class="col">
+				<mvc:label path="estadoFisico">Estado Fisico<%-- <spring:message code="etiqueta.genero" /> --%>:</mvc:label>
+				<br />
+				<mvc:radiobuttons path="estadoFisico" items="${listaFisico}" element="p" />
+			</div>
+			<div class="col">
+				<mvc:label path="motoActual">Moto Actual<%-- <spring:message code="etiqueta.curso" /> --%>:</mvc:label>
+				<mvc:input type="text" path="motoActual" class="form-control" />
+				<mvc:errors path="motoActual" cssClass="text-warning"></mvc:errors>
+
+			</div>
+			<mvc:hidden path="nombreFicheroConImagen"/>
+			<%-- <div class="col">
+				<mvc:label path="nacionalidad"><spring:message code="etiqueta.curso" />:</mvc:label>
+				<mvc:input type="text" path="nacionalidad" class="form-control" />
+				<mvc:errors path="nacionalidad" cssClass="text-warning"></mvc:errors>
+
+			</div> --%>
+		</div>
+		<%--<div class="form-row">
 			<div class="col">
 				<mvc:checkbox path="erasmus" />
 				<mvc:label path="erasmus"><spring:message code="etiqueta.erasmus" /></mvc:label>
@@ -113,7 +139,7 @@
 
 			</div>
 		</div> --%>
-		</div>
+		
 		<input type="submit" path="A�adir" class='btn btn-success' />
 	</mvc:form>
 

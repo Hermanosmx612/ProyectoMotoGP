@@ -2,6 +2,7 @@ package org.alumno.alex.alex_proyecto_motogp.model.ram;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,20 +19,6 @@ public class Corredor {
 	private String estadoFisico;
 	private String motoActual;
 	private String nombreFicheroConImagen;
-	
-	
-	public Corredor( String nombre, int dorsal, String equipo, String nacionalidad,
-			int edad, String estadoFisico, String motoActual) {
-		super();
-//		this.imagenPiloto = imagenPiloto;
-		this.nombre = nombre;
-		this.dorsal = dorsal;
-		this.equipo = equipo;
-		this.nacionalidad = nacionalidad;
-		this.edad = edad;
-		this.estadoFisico = estadoFisico;
-		this.motoActual = motoActual;
-	}
 
 
 	public Corredor(int numLicencia, String nombre, int dorsal, String equipo, String nacionalidad) {
@@ -53,6 +40,28 @@ public class Corredor {
 		this.nacionalidad = nacionalidad;
 		nombreFicheroConImagen = nombrefichero;
 	}
+
+	
+	public Corredor(int numLicencia, MultipartFile imagenPiloto, String nombre, int dorsal, String equipo,
+			String nacionalidad, int edad, String estadoFisico, String motoActual, String nombreFicheroConImagen) {
+		super();
+		this.numLicencia = numLicencia;
+		this.imagenPiloto = imagenPiloto;
+		this.nombre = nombre;
+		this.dorsal = dorsal;
+		this.equipo = equipo;
+		this.nacionalidad = nacionalidad;
+		this.edad = edad;
+		this.estadoFisico = estadoFisico;
+		this.motoActual = motoActual;
+		this.nombreFicheroConImagen = nombreFicheroConImagen;
+	}
+	
+	public Corredor() {
+		
+	}
+	
+	
 
 
 	
