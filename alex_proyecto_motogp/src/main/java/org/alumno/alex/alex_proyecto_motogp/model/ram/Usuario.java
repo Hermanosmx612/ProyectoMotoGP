@@ -20,7 +20,6 @@ public class Usuario {
 	@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,16}$", message = "La contraseña debe contener al menos un dígito, una minúscula, una mayúscula y un carácter no alfanumérico")
 	private String password;
 	private String nombreFicheroConImagen;
-	
 	private String user;
 
 	@Override

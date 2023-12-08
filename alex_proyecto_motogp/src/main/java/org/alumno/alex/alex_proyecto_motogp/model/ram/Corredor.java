@@ -43,6 +43,16 @@ public class Corredor {
 		this.nacionalidad = nacionalidad;
 		nombreFicheroConImagen = "Desconocido.jpg";
 	}
+	
+	public Corredor(int numLicencia, String nombre, int dorsal, String equipo, String nacionalidad, String nombrefichero) {
+		super();
+		this.numLicencia = numLicencia;
+		this.nombre = nombre;
+		this.dorsal = dorsal;
+		this.equipo = equipo;
+		this.nacionalidad = nacionalidad;
+		nombreFicheroConImagen = nombrefichero;
+	}
 
 
 	

@@ -60,19 +60,19 @@
 						disabled="disabled"></td>
 					<td>${alumno.getModificado()}</td> --%>
 					
-					<%-- <td><a class="btn btn-success"
-						href="update-alumno?update=${alumno.dni}">Actualizar<spring:message code="boton.modificar" /></a></td>
-					<td><a class="btn btn-danger"
+					 <td><a class="btn btn-success"
+						href="update-imagenPiloto?numLicencia=${corredor.getNumLicencia()}">Modificar Foto<%-- <spring:message code="boton.modificar" /> --%></a></td>
+				<%-- 	<td><a class="btn btn-danger"
 						href="del-alumno?alumno=${alumno.dni}">Borrar<spring:message code="boton.borrar" /></a></td>
 					<td><a class="btn btn-success"
-						href="doc-alumno?alumno=${alumno.dni}">Agregar Documento<spring:message code="boton.documentacion" /></a></td> --%>
+						href="doc-alumno?alumno=${alumno.dni}">Agregar Documento<spring:message code="boton.documentacion" /></a></td>  --%>
 				</tr>
 			</c:forEach>
 	</table>
 
 
 
-<p>	<a  class="btn btn-success" href="add-alumno"><i class="fas fa-user-plus"></i>&nbsp;Nuevo<%-- <spring:message code="boton.nuevo" /> --%></a></p></div>
+<p>	<a  class="btn btn-success" href="add-piloto"><i class="fas fa-user-plus"></i>&nbsp;Nuevo<%-- <spring:message code="boton.nuevo" /> --%></a></p></div>
 
 
 
