@@ -165,4 +165,11 @@ public class CorredorController {
 		
 	
 	}
+	
+	
+	@GetMapping("del-piloto")
+	public String delPiloto(@RequestParam("piloto") String licencia) {
+		servicioCorredores.delPiloto(licencia);
+		return "redirect:list-corredores";
+	}
 }

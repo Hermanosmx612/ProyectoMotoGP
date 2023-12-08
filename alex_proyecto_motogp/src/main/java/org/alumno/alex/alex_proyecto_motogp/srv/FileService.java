@@ -23,12 +23,18 @@ public class FileService {
 		private static final String CARPETA_FICHEROS_DINAMICOS_WEBAPP = USER_HOME_TOMCAT + SEPARATOR
 				+ "PilotosWebApp_DynamicFiles" + SEPARATOR;
 		private static final String CARPETA_IMAGENES_USUARIOS = CARPETA_FICHEROS_DINAMICOS_WEBAPP + "ImagenPilotos";
+		private static final String CARPETA_IMAGENES_MOTOS = CARPETA_FICHEROS_DINAMICOS_WEBAPP + "ImagenMotos";
+
 		private static final String CARPETA_DOCUMENTACION_ALUMNOS = CARPETA_FICHEROS_DINAMICOS_WEBAPP
 				+ "DocumentacionAlumnos";
 
 		public FileSystemResource getImagenUsuario(String fichero) {
 			return new FileSystemResource(new File(CARPETA_IMAGENES_USUARIOS, fichero));
 		}
+		public FileSystemResource getImagenMoto(String fichero) {
+			return new FileSystemResource(new File(CARPETA_IMAGENES_MOTOS, fichero));
+		}
+		
 
 		private String guardarFichero(String ruta, MultipartFile fichero) {
 			try {

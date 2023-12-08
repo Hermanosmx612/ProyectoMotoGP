@@ -22,7 +22,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="list-modulo" style="color: #ffffff;">
+                <a class="nav-link" href="list-motos" style="color: #ffffff;">
                     <i class="fas fa-motorcycle"></i>&nbsp;Motos
                 </a>
             </li>

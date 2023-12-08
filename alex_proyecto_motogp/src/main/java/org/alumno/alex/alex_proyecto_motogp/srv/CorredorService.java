@@ -58,4 +58,13 @@ public class CorredorService {
 	public void addPiloto(CorredorEdit piloto) {
 		corredores.add(PilotoMapper.INSTANCE.corredorEditToCorredor(piloto));
 	}
+	
+	public void delPiloto(String licencia) {
+		for(int i = 0; i < corredores.size(); i++) {
+			if(corredores.get(i).getNumLicencia() == Integer.parseInt(licencia)) {
+				corredores.remove(i);
+				break;
+			}
+		}
+	}
 }

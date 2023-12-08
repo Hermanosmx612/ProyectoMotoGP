@@ -1,5 +1,7 @@
 package org.alumno.alex.alex_proyecto_motogp.model.ram;
 
+import java.util.Objects;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Builder.Default;
@@ -59,6 +61,23 @@ public class Corredor {
 	
 	public Corredor() {
 		
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(numLicencia);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Corredor other = (Corredor) obj;
+		return numLicencia == other.numLicencia;
 	}
 	
 	

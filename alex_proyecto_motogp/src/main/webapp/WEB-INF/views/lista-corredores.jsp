@@ -62,9 +62,9 @@
 					
 					 <td><a class="btn btn-success"
 						href="update-imagenPiloto?numLicencia=${corredor.getNumLicencia()}">Modificar Foto<%-- <spring:message code="boton.modificar" /> --%></a></td>
-				<%-- 	<td><a class="btn btn-danger"
-						href="del-alumno?alumno=${alumno.dni}">Borrar<spring:message code="boton.borrar" /></a></td>
-					<td><a class="btn btn-success"
+				 	<td><a class="btn btn-danger"
+						href="del-piloto?piloto=${corredor.getNumLicencia()}">Borrar<%-- <spring:message code="boton.borrar" /> --%></a></td>
+					<%-- <td><a class="btn btn-success"
 						href="doc-alumno?alumno=${alumno.dni}">Agregar Documento<spring:message code="boton.documentacion" /></a></td>  --%>
 				</tr>
 			</c:forEach>
