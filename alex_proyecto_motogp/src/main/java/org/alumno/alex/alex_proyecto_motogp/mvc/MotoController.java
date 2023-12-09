@@ -77,7 +77,7 @@ public class MotoController {
 		public String addMoto_post(ModelMap model,@Valid Moto moto,
 				BindingResult validacion) {
 		if(validacion.hasErrors()) {
-			return "update-imagenPiloto";
+			return "add-moto";
 		}
 		
 		int id = moto.getId();
@@ -110,10 +110,8 @@ public class MotoController {
 		}catch(Exception e) {
 			model.addAttribute(motoService.encontrarMotoPorId(id+""));
 			//model.addAttribute("imagenPiloto", new ImagenPiloto(numLicencia));
-			
-			
 			model.addAttribute("errores", e.getMessage());
-			return "update-imagenPiloto";
+			return "add-moto";
 		}
 		}
 	

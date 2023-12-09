@@ -3,21 +3,29 @@ package org.alumno.alex.alex_proyecto_motogp.model.ram;
 import java.util.Objects;
 
 import org.alumno.alex.alex_proyecto_motogp.validaciones.ImagenValida;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class Moto {
-	@NotNull
+	@NotNull(message = "No puede estar vacio")
 	@ImagenValida
 	private MultipartFile imagenMoto;
 	private int id;
+	@NotNull(message = "No puede estar vacio")
+	@Size(min = 3 , max= 10, message = "Longitud incorrecta")
 	private String nombre;
+	@NotNull(message = "No puede estar vacio")
+	@Size(min = 3 , max= 10, message = "Longitud incorrecta")
 	private String nacionalidad;
+	@NotNull(message = "No puede estar vacio")
+	@Range(min = 1900 , max= 2023, message = "Fecha Incorrecta")
 	private int anoFundacion;
 	private String nombreFicheroImagen;
 	
