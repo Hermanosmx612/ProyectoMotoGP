@@ -5,6 +5,27 @@
 <div class="container">
 	<h1> Lista Motos<%-- <spring:message code="modulos.titulo" /> --%>:</h1>
 	<p style="color: red">${errores}</p> 
+	<mvc:form method="post" action="filtrar-moto" modelAttribute="filtroMoto">
+		<div class="form-row">
+			<div class="col">
+				<mvc:label path="campo"><%-- <spring:message code="etiqueta.opciones" /> --%>Filtrar:</mvc:label>
+				</br>
+				<mvc:select path="campo">
+					<mvc:options items="${campoLista}"></mvc:options>
+				</mvc:select>
+			</div>
+			<div class="col">
+				<mvc:label path="valor">Valor<%-- <spring:message code="etiqueta.valor" /> --%>:</mvc:label> </br>
+				<mvc:input type="text" path="valor" required="required"/>
+				<button path="Buscar" type="submit" class="btn btn-success"><i class="fas fa-search"></i>&nbsp;Filtrar<%-- <spring:message code="boton.filtrar" /> --%></button>
+				
+			</div>
+		</div>
+		
+
+
+	</mvc:form> 
+	</br> </br>
 	<table class="table table-stripped">
 		<thead>
 		<th><a class="nav-link " href="list-modulo?orden=id">Imagen

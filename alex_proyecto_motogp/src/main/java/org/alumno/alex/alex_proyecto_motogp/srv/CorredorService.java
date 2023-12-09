@@ -2,8 +2,10 @@ package org.alumno.alex.alex_proyecto_motogp.srv;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.alumno.alex.alex_proyecto_motogp.model.dto.CorredorEdit;
+import org.alumno.alex.alex_proyecto_motogp.model.dto.CorredorList;
 import org.alumno.alex.alex_proyecto_motogp.model.ram.Corredor;
 import org.alumno.alex.alex_proyecto_motogp.srv.mapper.PilotoMapper;
 import org.springframework.stereotype.Service;
@@ -75,5 +77,63 @@ public class CorredorService {
 				break;
 			}
 		}
+	}
+	
+	public List<CorredorList> listaPilotos(String criterioOrdenacion, String buscar) {
+		List<Corredor> pilotosFiltrados = new ArrayList<Corredor>();
+
+		switch (criterioOrdenacion) {
+		case "Numero Licencia":
+			pilotosFiltrados = (List<Corredor>) corredores.stream().filter(a -> (a.getNumLicencia()+"").equals(buscar))
+					.collect(Collectors.toList());
+			break;
+		case "Equipo":
+			pilotosFiltrados = (List<Corredor>) corredores.stream().filter(a -> (a.getEquipo() + "").equals(buscar))
+					.collect(Collectors.toList());
+			break;
+		case "Nacionalidad":
+			pilotosFiltrados = (List<Corredor>) corredores.stream().filter(a -> (a.getNacionalidad() + "").equals(buscar))
+					.collect(Collectors.toList());
+			break;
+
+		}
+		return PilotoMapper.INSTANCE.corredorToCorredorList(pilotosFiltrados);
+
+	}
+	
+	public List<CorredorList> ordenarPorCriterio(String criterioOrdenacion) {
+		List<Corredor> pilotosOrdenados = new ArrayList<Corredor>();
+
+		switch (criterioOrdenacion) {
+		case "nombre":
+			pilotosOrdenados =  (List<Corredor>) corredores.stream().sorted((a1, a2) -> a1.getNombre().compareTo(a2.getNombre()))
+					.collect(Collectors.toList());
+			break;
+		case "numLicencia":
+			pilotosOrdenados = (List<Corredor>) corredores.stream().sorted((a1, a2) -> Integer.compare(a1.getNumLicencia(), a2.getNumLicencia()))
+					.collect(Collectors.toList());
+			break;
+
+		case "dorsal":
+
+			pilotosOrdenados =  (List<Corredor>) corredores.stream().sorted((a1, a2) -> Integer.compare(a1.getDorsal(), a2.getDorsal()))
+					.collect(Collectors.toList());
+			break;
+
+
+		case "equipo":
+			pilotosOrdenados = (List<Corredor>) corredores.stream().sorted((a1, a2) -> a1.getEquipo().compareTo(a2.getEquipo()))
+					.collect(Collectors.toList());
+			break;
+
+
+		case "nacionalidad":
+			pilotosOrdenados = (List<Corredor>) corredores.stream().sorted((a1, a2) -> a1.getNacionalidad().compareTo(a2.getNacionalidad()))
+			.collect(Collectors.toList());
+			break;
+
+
+		}
+		return PilotoMapper.INSTANCE.corredorToCorredorList(pilotosOrdenados);
 	}
 }

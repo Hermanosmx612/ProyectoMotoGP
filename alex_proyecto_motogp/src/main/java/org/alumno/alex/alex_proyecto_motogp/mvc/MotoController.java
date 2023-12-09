@@ -1,7 +1,10 @@
 package org.alumno.alex.alex_proyecto_motogp.mvc;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import org.alumno.alex.alex_proyecto_motogp.model.ram.FiltroMoto;
+import org.alumno.alex.alex_proyecto_motogp.model.ram.FiltroPiloto;
 import org.alumno.alex.alex_proyecto_motogp.model.ram.Moto;
 import org.alumno.alex.alex_proyecto_motogp.srv.FileService;
 import org.alumno.alex.alex_proyecto_motogp.srv.MotoService;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,10 +36,14 @@ public class MotoController {
 	@GetMapping("list-motos")
 	public String listarMotos(ModelMap model) {
 		model.addAttribute("listaMotos", motoService.getMotos());
+		model.addAttribute("filtroMoto", new FiltroMoto());
 		return "list-motos";
 	}
 	
-	
+	@ModelAttribute("campoLista")
+	public Object[] listarCampos() {
+		return motoService.listarCampos().toArray();
+	}
 	
 	@RequestMapping(value = "/imagenMotos/{id}", method = RequestMethod.GET)
 	public ResponseEntity<FileSystemResource> getFile(@PathVariable("id") String id) {
@@ -119,5 +127,12 @@ public class MotoController {
 	public String delMoto(@RequestParam("idMoto") String idMoto) {
 		motoService.delMoto(Integer.parseInt(idMoto));
 		return "redirect:list-motos";
+	}
+	
+	@PostMapping("filtrar-moto")
+	public String filtrarMoto(ModelMap model, FiltroMoto filtroMoto) {
+		model.put("listaMotos", motoService.listaMotos(filtroMoto.getCampo(), filtroMoto.getValor()));
+		model.addAttribute("filtroPiloto", filtroMoto);
+		return "list-motos";
 	}
 	}

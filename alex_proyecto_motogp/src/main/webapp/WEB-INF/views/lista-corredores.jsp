@@ -6,7 +6,7 @@
 	<h1><%-- <spring:message code="alumnos.titulo" /> --%>Lista pilotos:</h1>
 	<%-- <p>Bienvenido ${nickname}</p> --%>
 	<p style="color:red">${errores}</p>
-	 <mvc:form method="post" action="filtrar-alumno" modelAttribute="filtroPiloto">
+	 <mvc:form method="post" action="filtrar-piloto" modelAttribute="filtroPiloto">
 		<div class="form-row">
 			<div class="col">
 				<mvc:label path="campo"><%-- <spring:message code="etiqueta.opciones" /> --%>Filtrar:</mvc:label>
@@ -30,20 +30,20 @@
 
 	<table class="table table-stripped">
 		<thead>
-			 <th><a class="nav-link " href="list-alumno?orden=nombre">Imagen<%-- <spring:message code="etiqueta.nombre" />  --%>
+			 <th><a class="nav-link " href="#">Imagen<%-- <spring:message code="etiqueta.nombre" />  --%>
 		
-			<th><a class="nav-link " href="list-alumno?orden=nombre">Numero de Licencia<%-- <spring:message code="etiqueta.nombre" /> --%>
+			<th><a class="nav-link " href="list-corredores?orden=numLicencia">Numero de Licencia<%-- <spring:message code="etiqueta.nombre" /> --%>
 			</a></th>
-			<th><a class="nav-link " href="list-alumno?orden=dni">Nombre<%-- <spring:message code="etiqueta.dni" /> --%></a></th>
+			<th><a class="nav-link " href="list-corredores?orden=nombre">Nombre<%-- <spring:message code="etiqueta.dni" /> --%></a></th>
 
 
-			<th><a class="nav-link " href="list-alumno?orden=edad">Dorsal<%-- <spring:message code="etiqueta.edad" /> --%>
+			<th><a class="nav-link " href="list-corredores?orden=dorsal">Dorsal<%-- <spring:message code="etiqueta.edad" /> --%>
 			</a></th>
 			
-			<th><a class="nav-link " href="list-alumno?orden=modulo">Equipo<%-- <spring:message code="etiqueta.ciclo" /> --%>
+			<th><a class="nav-link " href="list-corredores?orden=equipo">Equipo<%-- <spring:message code="etiqueta.ciclo" /> --%>
 			</a></th>
 
-			<th><a class="nav-link " href="list-alumno?orden=modulo">Nacionalidad<%-- <spring:message code="etiqueta.ciclo" /> --%>
+			<th><a class="nav-link " href="list-corredores?orden=nacionalidad">Nacionalidad<%-- <spring:message code="etiqueta.ciclo" /> --%>
 			</a></th>
 			
 			<th><a class="" href="#">Acciones </a></th>

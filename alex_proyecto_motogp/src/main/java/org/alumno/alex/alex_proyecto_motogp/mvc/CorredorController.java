@@ -40,9 +40,13 @@ public class CorredorController {
 	FileService fileService;
 	
 	@GetMapping("list-corredores")
-	public String listarCorredores(ModelMap model) {
+	public String listarCorredores(ModelMap model,  @RequestParam(name = "orden", required = false) String orden) {
+		if(orden == null) {
+			model.put("corredoresList", servicioCorredores.getCorredores());
+		}else {
+			model.put("corredoresList", servicioCorredores.ordenarPorCriterio(orden));
+		}
 		
-		model.put("corredoresList", servicioCorredores.getCorredores());
 		model.addAttribute("filtroPiloto", new FiltroPiloto());
 		return "lista-corredores";
 	}
@@ -199,5 +203,12 @@ public class CorredorController {
 		servicioCorredores.addPiloto(PilotoMapper.INSTANCE.corredorToCorredorEdit(piloto));
 		model.addAttribute("piloto", piloto);
 		return "redirect:list-corredores";
+	}
+	
+	@PostMapping("filtrar-piloto")
+	public String filtrarPiloto(ModelMap model, FiltroPiloto filtroPiloto) {
+		model.put("corredoresList", servicioCorredores.listaPilotos(filtroPiloto.getCampo(), filtroPiloto.getValor()));
+		model.addAttribute("filtroPiloto", filtroPiloto);
+		return "lista-corredores";
 	}
 }
