@@ -6,26 +6,26 @@
 	<h1><%-- <spring:message code="alumnos.titulo" /> --%>Lista pilotos:</h1>
 	<%-- <p>Bienvenido ${nickname}</p> --%>
 	<p style="color:red">${errores}</p>
-	<%-- <mvc:form method="post" action="filtrar-alumno" modelAttribute="filtroAlumno">
+	 <mvc:form method="post" action="filtrar-alumno" modelAttribute="filtroPiloto">
 		<div class="form-row">
 			<div class="col">
-				<mvc:label path="campo"><spring:message code="etiqueta.opciones" />Filtrar:</mvc:label>
+				<mvc:label path="campo"><%-- <spring:message code="etiqueta.opciones" /> --%>Filtrar:</mvc:label>
 				</br>
 				<mvc:select path="campo">
 					<mvc:options items="${campoLista}"></mvc:options>
 				</mvc:select>
 			</div>
 			<div class="col">
-				<mvc:label path="valor"><spring:message code="etiqueta.valor" />:</mvc:label> </br>
+				<mvc:label path="valor">Valor<%-- <spring:message code="etiqueta.valor" /> --%>:</mvc:label> </br>
 				<mvc:input type="text" path="valor" required="required"/>
-				<button path="Buscar" type="submit" class="btn btn-success"><i class="fas fa-search"></i>&nbsp;</i>&nbsp;<spring:message code="boton.filtrar" /></button>
+				<button path="Buscar" type="submit" class="btn btn-success"><i class="fas fa-search"></i>&nbsp;Filtrar<%-- <spring:message code="boton.filtrar" /> --%></button>
 				
 			</div>
 		</div>
 		
 
 
-	</mvc:form> --%>
+	</mvc:form> 
 	</br> </br>
 
 	<table class="table table-stripped">
@@ -64,8 +64,8 @@
 						href="update-imagenPiloto?numLicencia=${corredor.getNumLicencia()}">Modificar Foto<%-- <spring:message code="boton.modificar" /> --%></a></td>
 				 	<td><a class="btn btn-danger"
 						href="del-piloto?piloto=${corredor.getNumLicencia()}"><i class="fas fa-trash-alt"></i>&nbsp;Borrar<%-- <spring:message code="boton.borrar" /> --%></a></td>
-					<%-- <td><a class="btn btn-success"
-						href="doc-alumno?alumno=${alumno.dni}">Agregar Documento<spring:message code="boton.documentacion" /></a></td>  --%>
+					 <td><a class="btn btn-success"
+						href="update-piloto?piloto=${corredor.getNumLicencia()}">Modificar<%-- <spring:message code="boton.documentacion" /> --%></a></td> 
 				</tr>
 			</c:forEach>
 	</table>

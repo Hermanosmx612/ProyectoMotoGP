@@ -5,12 +5,13 @@ import java.util.List;
 
 import org.alumno.alex.alex_proyecto_motogp.model.dto.CorredorEdit;
 import org.alumno.alex.alex_proyecto_motogp.model.ram.Corredor;
+import org.alumno.alex.alex_proyecto_motogp.model.ram.FiltroPiloto;
 import org.alumno.alex.alex_proyecto_motogp.model.ram.ImagenPiloto;
-import org.alumno.alex.alex_proyecto_motogp.model.ram.Usuario;
 import org.alumno.alex.alex_proyecto_motogp.srv.CorredorService;
 import org.alumno.alex.alex_proyecto_motogp.srv.FileService;
 import org.alumno.alex.alex_proyecto_motogp.srv.excepciones.PilotoDuplicadoException;
 import org.alumno.alex.alex_proyecto_motogp.srv.mapper.PilotoMapper;
+import org.eclipse.tags.shaded.org.apache.bcel.generic.NEW;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpStatus;
@@ -42,7 +43,13 @@ public class CorredorController {
 	public String listarCorredores(ModelMap model) {
 		
 		model.put("corredoresList", servicioCorredores.getCorredores());
+		model.addAttribute("filtroPiloto", new FiltroPiloto());
 		return "lista-corredores";
+	}
+	
+	@ModelAttribute("campoLista")
+	public Object[] listarCampos() {
+		return servicioCorredores.listarCampos().toArray();
 	}
 	
 	@RequestMapping(value = "/imagenPilotos/{numLicencia}", method = RequestMethod.GET)
@@ -170,6 +177,27 @@ public class CorredorController {
 	@GetMapping("del-piloto")
 	public String delPiloto(@RequestParam("piloto") String licencia) {
 		servicioCorredores.delPiloto(licencia);
+		return "redirect:list-corredores";
+	}
+	
+	@GetMapping("update-piloto")
+	public String updatePiloto(@RequestParam("piloto") String numLicencia,ModelMap model) {
+		Corredor piloto = servicioCorredores.encontrarPilotoLicencia(numLicencia);
+		model.addAttribute("piloto", piloto);
+		return "update-piloto";
+	}
+	
+	@PostMapping("update-piloto")
+	public String updatePilotoPost(@Valid Corredor piloto,BindingResult validacion,ModelMap model) {
+		if(validacion.hasErrors()) {
+			return "update-piloto";
+		}
+		Corredor pilotoExistente = servicioCorredores.encontrarPilotoLicencia(piloto.getNumLicencia()+"");
+		String nombreArchivoExistente = pilotoExistente.getNombreFicheroConImagen();
+		servicioCorredores.delPiloto(pilotoExistente.getNumLicencia()+"");
+		piloto.setNombreFicheroConImagen(nombreArchivoExistente);
+		servicioCorredores.addPiloto(PilotoMapper.INSTANCE.corredorToCorredorEdit(piloto));
+		model.addAttribute("piloto", piloto);
 		return "redirect:list-corredores";
 	}
 }

@@ -24,6 +24,15 @@ public class CorredorService {
 
 	}
 	
+	public List<String> listarCampos() {
+		List<String> campos = new ArrayList<String>();
+		campos.removeAll(campos);
+		campos.add("Numero Licencia");
+		campos.add("Equipo");
+		campos.add("Nacionalidad");
+		return campos;
+	}
+	
 	
 	
 	public Corredor encontrarPilotoLicencia(String numLicencia) {

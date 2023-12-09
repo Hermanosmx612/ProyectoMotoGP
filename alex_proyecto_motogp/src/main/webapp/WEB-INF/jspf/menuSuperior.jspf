@@ -26,11 +26,6 @@
                     <i class="fas fa-motorcycle"></i>&nbsp;Motos
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="list-logError" style="color: #ffffff;">
-                    <i class="fas fa-exclamation-triangle"></i>&nbsp;Errores
-                </a>
-            </li>
-        </ul>
+                    </ul>
     </div>
 </nav>

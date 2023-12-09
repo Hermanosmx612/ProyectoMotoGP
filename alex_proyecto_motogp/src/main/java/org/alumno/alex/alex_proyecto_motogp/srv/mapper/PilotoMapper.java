@@ -15,5 +15,7 @@ public interface PilotoMapper{
 	List<CorredorList> corredorToCorredorList(List<Corredor> corredores);
 	
 	Corredor corredorEditToCorredor(CorredorEdit corredorEdit);
+	
+	CorredorEdit corredorToCorredorEdit(Corredor corredor);
 
 }

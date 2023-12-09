@@ -3,12 +3,10 @@
 <%@ include file="../jspf/header.jspf"%>
 <%@ include file="../jspf/menuSuperior.jspf"%>
 
-<div class="container">
-	
-	<h1>Add piloto<%-- <spring:message code="alumno.nuevo.titulo" /> --%>:</h1>
+	<h1>Update Piloto<%-- <spring:message code="alumno.nuevo.titulo" /> --%>:</h1>
 	<p style="color: red;">${error}</p>
 
-	<mvc:form action="add-piloto" method="post" modelAttribute="corredorEdit">
+	<mvc:form action="update-piloto" method="post" modelAttribute="piloto">
 		<mvc:errors path="*" cssClass="text-warning"></mvc:errors>
 		<div class="form-row">
 			<div class="col">
@@ -67,12 +65,10 @@
 		</div>
 		<input type="submit" path="A�adir" class='btn btn-success' />
 	</mvc:form>
-
-
-
-
-
 </div>
+
+
+
 
 
 
