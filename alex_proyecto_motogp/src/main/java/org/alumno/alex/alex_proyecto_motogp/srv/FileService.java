@@ -74,6 +74,21 @@ public class FileService {
 				return new ArrayList<String>(List.of(errorAlGuardar));
 
 		}
+		
+		public ArrayList<String> guardaImagenMoto(MultipartFile fichero, String nickName) {
+			String nombreFichero = getNombreImagenUsuario(fichero, nickName);
+			// Comprobaciones de errores
+			if (!ValidadorImagenes.imagenValida(fichero)) {
+				return ValidadorImagenes.mensajesErrorImagen(fichero);
+			}
+			// Guardar fichero
+			String errorAlGuardar = guardarFichero(CARPETA_IMAGENES_MOTOS + SEPARATOR + nombreFichero, fichero);
+			if (errorAlGuardar == null)
+				return new ArrayList<String>();
+			else
+				return new ArrayList<String>(List.of(errorAlGuardar));
+
+		}
 
 		// Consulta el tipo de extensión del fichero y devuelve un String "nickname.ext"
 		public String getNombreImagenUsuario(MultipartFile fichero, String nickName) {

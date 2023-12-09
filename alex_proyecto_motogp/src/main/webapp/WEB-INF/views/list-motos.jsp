@@ -7,6 +7,8 @@
 	<p style="color: red">${errores}</p> 
 	<table class="table table-stripped">
 		<thead>
+		<th><a class="nav-link " href="list-modulo?orden=id">Imagen
+			</a></th>
 			<th><a class="nav-link " href="list-modulo?orden=id">Id
 			</a></th>
 			<th><a class="nav-link " href="list-modulo?orden=nombre">Nombre<%-- <spring:message code="etiqueta.nombre" /> --%> </a></th>
@@ -29,7 +31,7 @@
 					<td>${moto.nacionalidad}</td>
 					<td>${moto.anoFundacion}</td>
 					<td><a class="btn btn-danger"
-						href="del-modulo?modulo=${modulo.nombre}">Borrar</a></td>
+						href="del-moto?idMoto=${moto.id}"><i class="fas fa-trash-alt"></i>&nbsp;Borrar</a></td>
 				</tr>
 			</c:forEach>
 			
@@ -37,7 +39,7 @@
 
 
 
-	<a href="add-modulo" class="btn btn-success">Add<%-- <spring:message code="boton.anyadir" /> --%></a>
+	<a href="add-moto" class="btn btn-success"><i class="fas fa-motorcycle"></i>&nbsp;Nuevo<%-- <spring:message code="boton.anyadir" /> --%></a>
 </div>
 
 <%@ include file="../jspf/footer.jspf"%>
