@@ -1,6 +1,7 @@
 package org.alumno.alex.alex_proyecto_motogp.srv;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -135,5 +136,29 @@ public class CorredorService {
 
 		}
 		return PilotoMapper.INSTANCE.corredorToCorredorList(pilotosOrdenados);
+	}
+	
+	
+	public void modificarPiloto(CorredorEdit corredorEditModifido, String usuarioModificacion) throws Exception {
+		if (usuarioModificacion == null || corredorEditModifido == null) {
+			throw new Exception("Algo mal va por aqui");
+		} else {
+			Corredor corredorActual = encontrarPilotoLicencia(corredorEditModifido.getNumLicencia()+"");
+			CorredorEdit corredorEditActual = PilotoMapper.INSTANCE.corredorToCorredorEdit(corredorActual);
+			if (corredorEditActual.sePuedeModificarUtilizando(corredorEditModifido)) {
+				// List<DocAlumno> docsAlumnos = alumnoModificado.getDocsAlumno();
+				// System.out.println(alumnoModificado.getDocsAlumno());
+				corredores.remove(corredorActual);
+				corredorEditModifido.setTs(new Date());
+				corredorEditModifido.setUser(usuarioModificacion);
+//				alumnoModificado.setDocsAlumno(docsAlumnos);
+				//alumnos.add(alumnoEditModificado);
+				PilotoMapper.INSTANCE.updateCorredorFromCorredorEdit(corredorEditModifido, corredorActual);
+				corredores.add(corredorActual);		
+			} else {
+				throw new Exception(corredorActual.mensajeNoSePuedeModificar());
+			}
+		}
+
 	}
 }

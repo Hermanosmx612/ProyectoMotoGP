@@ -9,4 +9,5 @@ import org.mapstruct.factory.Mappers;
 public interface MotoMapper {
 	MotoMapper INSTANCE= Mappers.getMapper(MotoMapper.class);
 	Moto motoInfoToMoto(MotoInfo moto);
+	
 }

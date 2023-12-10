@@ -5,6 +5,8 @@
 
 	<h1>Update Piloto<%-- <spring:message code="alumno.nuevo.titulo" /> --%>:</h1>
 	<p style="color: red;">${error}</p>
+	<p style="color: red;">${error2}</p>
+	
 
 	<mvc:form action="update-piloto" method="post" modelAttribute="piloto">
 		<mvc:errors path="*" cssClass="text-warning"></mvc:errors>
@@ -64,6 +66,8 @@
 			<mvc:hidden path="nombreFicheroConImagen"/>
 		</div>
 		<input type="submit" path="A�adir" class='btn btn-success' />
+		<mvc:hidden path="user"/>
+		<mvc:hidden path="ts"/>
 	</mvc:form>
 </div>
 

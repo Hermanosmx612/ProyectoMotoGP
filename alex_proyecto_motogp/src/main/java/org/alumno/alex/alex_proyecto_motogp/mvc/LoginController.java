@@ -2,6 +2,7 @@ package org.alumno.alex.alex_proyecto_motogp.mvc;
 
 import java.util.Locale;
 
+import org.alumno.alex.alex_proyecto_motogp.model.ram.Pagina;
 import org.alumno.alex.alex_proyecto_motogp.model.ram.Usuario;
 import org.alumno.alex.alex_proyecto_motogp.srv.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,16 +12,20 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 
 @Controller
+@SessionAttributes({ "nickname"})
 public class LoginController {
 	@Autowired
 	LoginService servicioLogin;
 	
+	Pagina pagina = new Pagina("Login", "login");
+
 	@RequestMapping(value= {"/","login"},method=RequestMethod.GET)
 	public String mostrarLogin(ModelMap model, HttpServletRequest request, Locale locale, HttpServletResponse response) {
 		//System.out.println("Accept-language: " + request.getHeader("Accept-Language"));
@@ -29,6 +34,7 @@ public class LoginController {
 		//Pagina pagina = new Pagina("Login","login", i18Service.getIdioma());
 		//model.addAttribute("pagina",pagina);
 		model.addAttribute("usuario", new Usuario());
+		model.addAttribute("pagina", pagina);
 		//model.addAttribute("loginNickname","Desconocido");
 		return "login";
 	}

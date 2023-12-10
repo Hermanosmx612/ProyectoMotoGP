@@ -1,31 +1,38 @@
 package org.alumno.alex.alex_proyecto_motogp.mvc;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.alumno.alex.alex_proyecto_motogp.model.dto.CorredorEdit;
 import org.alumno.alex.alex_proyecto_motogp.model.ram.Corredor;
 import org.alumno.alex.alex_proyecto_motogp.model.ram.FiltroPiloto;
 import org.alumno.alex.alex_proyecto_motogp.model.ram.ImagenPiloto;
+import org.alumno.alex.alex_proyecto_motogp.model.ram.Pagina;
 import org.alumno.alex.alex_proyecto_motogp.srv.CorredorService;
 import org.alumno.alex.alex_proyecto_motogp.srv.FileService;
+import org.alumno.alex.alex_proyecto_motogp.srv.I18nService;
 import org.alumno.alex.alex_proyecto_motogp.srv.excepciones.PilotoDuplicadoException;
 import org.alumno.alex.alex_proyecto_motogp.srv.mapper.PilotoMapper;
-import org.eclipse.tags.shaded.org.apache.bcel.generic.NEW;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -33,19 +40,33 @@ import jakarta.validation.Valid;
 
 
 @Controller
+@SessionAttributes({ "nickname"})
 public class CorredorController {
 	@Autowired
 	CorredorService servicioCorredores;
 	@Autowired
 	FileService fileService;
+	@Autowired
+	I18nService i18nService;
+	
+	Pagina pagina = new Pagina("Pilotos", "list-corredores");
+	
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+	}
 	
 	@GetMapping("list-corredores")
+	
 	public String listarCorredores(ModelMap model,  @RequestParam(name = "orden", required = false) String orden) {
 		if(orden == null) {
 			model.put("corredoresList", servicioCorredores.getCorredores());
 		}else {
 			model.put("corredoresList", servicioCorredores.ordenarPorCriterio(orden));
 		}
+		pagina.setIdioma(i18nService.getIdioma());
+		model.addAttribute("pagina", pagina);
 		
 		model.addAttribute("filtroPiloto", new FiltroPiloto());
 		return "lista-corredores";
@@ -89,6 +110,7 @@ public class CorredorController {
 	public String updateImagenUsuario(ModelMap model, @RequestParam String numLicencia) {
 		//System.out.println("El geng");
 		model.addAttribute("imagenPiloto", new ImagenPiloto(numLicencia));
+		model.addAttribute("pagina", pagina);
 		return "update-imagenPiloto";
 	}
 	
@@ -122,6 +144,7 @@ public class CorredorController {
 			model.clear();
 			model.addAttribute(servicioCorredores.encontrarPilotoLicencia(numLicencia));
 			model.addAttribute("imagenPiloto", new ImagenPiloto(numLicencia));
+			model.addAttribute("pagina", pagina);
 			return "update-imagenPiloto";
 
 		}catch(Exception e) {
@@ -140,6 +163,7 @@ public class CorredorController {
 	@GetMapping("add-piloto")
 	public String addPiloto(ModelMap model) {
 		model.addAttribute("corredorEdit", new CorredorEdit());
+		model.addAttribute("pagina", pagina);
 		return "add-piloto";
 	}
 	
@@ -188,21 +212,40 @@ public class CorredorController {
 	public String updatePiloto(@RequestParam("piloto") String numLicencia,ModelMap model) {
 		Corredor piloto = servicioCorredores.encontrarPilotoLicencia(numLicencia);
 		model.addAttribute("piloto", piloto);
+		model.addAttribute("pagina", pagina);
 		return "update-piloto";
 	}
 	
 	@PostMapping("update-piloto")
-	public String updatePilotoPost(@Valid Corredor piloto,BindingResult validacion,ModelMap model) {
-		if(validacion.hasErrors()) {
-			return "update-piloto";
-		}
-		Corredor pilotoExistente = servicioCorredores.encontrarPilotoLicencia(piloto.getNumLicencia()+"");
-		String nombreArchivoExistente = pilotoExistente.getNombreFicheroConImagen();
-		servicioCorredores.delPiloto(pilotoExistente.getNumLicencia()+"");
-		piloto.setNombreFicheroConImagen(nombreArchivoExistente);
-		servicioCorredores.addPiloto(PilotoMapper.INSTANCE.corredorToCorredorEdit(piloto));
+	public String updatePilotoPost(@Valid CorredorEdit piloto,BindingResult validacion,ModelMap model) {
+//		if(validacion.hasErrors()) {
+//			return "update-piloto";
+//		}
+//		Corredor pilotoExistente = servicioCorredores.encontrarPilotoLicencia(piloto.getNumLicencia()+"");
+//		String nombreArchivoExistente = pilotoExistente.getNombreFicheroConImagen();
+//		servicioCorredores.delPiloto(pilotoExistente.getNumLicencia()+"");
+//		piloto.setNombreFicheroConImagen(nombreArchivoExistente);
+//		//servicioCorredores.addPiloto(PilotoMapper.INSTANCE.corredorToCorredorEdit(piloto));
+//		model.addAttribute("piloto", piloto);
+//		return "redirect:list-corredores";
+		
 		model.addAttribute("piloto", piloto);
-		return "redirect:list-corredores";
+		String nombreUsuario = (String) model.getAttribute("nickname");
+
+		if (validacion.hasErrors()) {
+			return "update-piloto";
+		} else {
+			try {
+				servicioCorredores.modificarPiloto(piloto, nombreUsuario);
+			} catch (Exception e) {
+				model.put("error2", e.getMessage());
+				Corredor a = servicioCorredores.encontrarPilotoLicencia(piloto.getNumLicencia()+"");
+				PilotoMapper.INSTANCE.corredorToCorredorEdit(a);
+				model.addAttribute("piloto", a);
+				return "update-piloto";
+			}
+			return "redirect:list-corredores";
+		}
 	}
 	
 	@PostMapping("filtrar-piloto")

@@ -1,11 +1,10 @@
 package org.alumno.alex.alex_proyecto_motogp.mvc;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.alumno.alex.alex_proyecto_motogp.model.ram.FiltroMoto;
-import org.alumno.alex.alex_proyecto_motogp.model.ram.FiltroPiloto;
 import org.alumno.alex.alex_proyecto_motogp.model.ram.Moto;
+import org.alumno.alex.alex_proyecto_motogp.model.ram.Pagina;
 import org.alumno.alex.alex_proyecto_motogp.srv.FileService;
 import org.alumno.alex.alex_proyecto_motogp.srv.MotoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +32,8 @@ public class MotoController {
 	MotoService motoService;
 	@Autowired
 	FileService fileService;
+	
+	Pagina pagina = new Pagina("Motos", "list-motos");
 	@GetMapping("list-motos")
 	public String listarMotos(ModelMap model, @RequestParam(name = "orden", required = false) String orden) {
 		if(orden == null) {
@@ -40,7 +41,8 @@ public class MotoController {
 		}else 
 		//{
 		model.addAttribute("listaMotos", motoService.ordenarPorCriterio(orden));
-		
+		model.addAttribute("pagina", pagina);
+
 		
 		model.addAttribute("filtroMoto", new FiltroMoto());
 		return "list-motos";
@@ -83,6 +85,7 @@ public class MotoController {
 	
 	@GetMapping("add-moto")
 	public String addMoto(ModelMap model) {
+		model.addAttribute("pagina", pagina);
 		model.addAttribute("moto", new Moto(motoService.saberUltimoIdMoto()+1));
 		return "add-moto";
 	}

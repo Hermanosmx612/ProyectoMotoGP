@@ -7,7 +7,7 @@
 <head>
 <link href="webjars/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 <link href="webjars/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
-<title><%-- ${pagina.getTitulo()} --%></title>
+<title>${pagina.getTitulo()}</title>
 <style>
 	.footer {
 		position: absolute;
