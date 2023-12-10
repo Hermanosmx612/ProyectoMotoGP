@@ -28,17 +28,17 @@
 	</br> </br>
 	<table class="table table-stripped">
 		<thead>
-		<th><a class="nav-link " href="list-modulo?orden=id">Imagen
+		<th><a class="nav-link " href="list-motos">Imagen
 			</a></th>
-			<th><a class="nav-link " href="list-modulo?orden=id">Id
+			<th><a class="nav-link " href="list-motos?orden=id">Id
 			</a></th>
-			<th><a class="nav-link " href="list-modulo?orden=nombre">Nombre<%-- <spring:message code="etiqueta.nombre" /> --%> </a></th>
+			<th><a class="nav-link " href="list-motos?orden=nombre">Nombre<%-- <spring:message code="etiqueta.nombre" /> --%> </a></th>
 	
 
-			<th><a class="nav-link " href="list-modulo?orden=hora">Nacionalidad<%-- <spring:message code="etiqueta.horas" /> --%>
+			<th><a class="nav-link " href="list-motos?orden=nacionalidad">Nacionalidad<%-- <spring:message code="etiqueta.horas" /> --%>
 			</a></th>
 
-			<th><a class="nav-link " href="list-modulo?orden=abreviatura">Año Fundacion<%-- <spring:message code="etiqueta.abreviatura" /> --%>
+			<th><a class="nav-link " href="list-motos?orden=fundacion">Año Fundacion<%-- <spring:message code="etiqueta.abreviatura" /> --%>
 			</a></th>
 
 			<th><a style="color:black "class="nav-link" href="#">Acciones<%-- <spring:message code="etiqueta.accion" /> --%> </a></th>

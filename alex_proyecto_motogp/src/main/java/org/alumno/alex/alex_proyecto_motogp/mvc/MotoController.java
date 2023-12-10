@@ -34,8 +34,14 @@ public class MotoController {
 	@Autowired
 	FileService fileService;
 	@GetMapping("list-motos")
-	public String listarMotos(ModelMap model) {
-		model.addAttribute("listaMotos", motoService.getMotos());
+	public String listarMotos(ModelMap model, @RequestParam(name = "orden", required = false) String orden) {
+		if(orden == null) {
+			model.addAttribute("listaMotos", motoService.getMotos());
+		}else 
+		//{
+		model.addAttribute("listaMotos", motoService.ordenarPorCriterio(orden));
+		
+		
 		model.addAttribute("filtroMoto", new FiltroMoto());
 		return "list-motos";
 	}

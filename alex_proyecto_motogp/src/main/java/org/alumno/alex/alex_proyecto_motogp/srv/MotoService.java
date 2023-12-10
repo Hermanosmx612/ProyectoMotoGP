@@ -83,6 +83,35 @@ public class MotoService {
 
 	}
 	
+	public List<Moto> ordenarPorCriterio(String criterioOrdenacion) {
+		List<Moto> motosOrdenadas = new ArrayList<Moto>();
+
+		switch (criterioOrdenacion) {
+		case "nombre":
+			motosOrdenadas =  (List<Moto>) motos.stream().sorted((a1, a2) -> a1.getNombre().compareTo(a2.getNombre()))
+					.collect(Collectors.toList());
+			break;
+		case "id":
+			motosOrdenadas = (List<Moto>) motos.stream().sorted((a1, a2) -> Integer.compare(a1.getId(), a2.getId()))
+					.collect(Collectors.toList());
+			break;
+
+		case "fundacion":
+
+			motosOrdenadas =  (List<Moto>) motos.stream().sorted((a1, a2) -> Integer.compare(a1.getAnoFundacion(), a2.getAnoFundacion()))
+					.collect(Collectors.toList());
+			break;
+
+		case "nacionalidad":
+			motosOrdenadas = (List<Moto>) motos.stream().sorted((a1, a2) -> a1.getNacionalidad().compareTo(a2.getNacionalidad()))
+			.collect(Collectors.toList());
+			break;
+
+
+		}
+		return motosOrdenadas;
+	}
+	
 	static {
 		motos.add(MotoMapper.INSTANCE.motoInfoToMoto(new MotoInfo(1,"Honda","Japon",1970,"1.jpeg")));
 		motos.add(MotoMapper.INSTANCE.motoInfoToMoto(new MotoInfo(2,"Yamaha","Japon",1970,"2.jpeg")));
