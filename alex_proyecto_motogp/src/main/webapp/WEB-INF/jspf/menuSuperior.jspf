@@ -1,31 +1,61 @@
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #343a40;">
-    <a href="https://aules.edu.gva.es/fp/course/view.php?id=112252" class="navbar-brand" style="color: #ff6b00;">
-        <i class="fas fa-motorcycle"></i>
-        &nbsp;MOTOGP &nbsp; &nbsp; &nbsp;
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" 
-        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
-        aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<nav class="navbar navbar-expand-lg navbar-dark"
+	style="background-color: #343a40;">
+	<a href="https://aules.edu.gva.es/fp/course/view.php?id=112252"
+		class="navbar-brand" style="color: #ff6b00;"> <i
+		class="fas fa-motorcycle"></i> &nbsp;MOTOGP &nbsp; &nbsp; &nbsp;
+	</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse"
+		data-target="#navbarSupportedContent"
+		aria-controls="navbarSupportedContent" aria-expanded="false"
+		aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="login" style="color: #ffffff;">
-                    <i class="fas fa-home"></i>&nbsp;Inicio
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="list-corredores" style="color: #ffffff;">
-                    <i class="fas fa-user-friends"></i>&nbsp;Pilotos
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="list-motos" style="color: #ffffff;">
-                    <i class="fas fa-motorcycle"></i>&nbsp;Motos
-                </a>
-            </li>
-                    </ul>
-    </div>
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item"><a class="nav-link" href="login"
+				style="color: #ffffff;"> <i class="fas fa-home"></i>&nbsp;<spring:message code="menuSuperior.inicio" />
+			</a></li>
+			<li class="nav-item"><a class="nav-link" href="list-corredores"
+				style="color: #ffffff;"> <i class="fas fa-user-friends"></i>&nbsp;<spring:message code="menuSuperior.pilotos" />
+			</a></li>
+			<li class="nav-item"><a class="nav-link" href="list-motos"
+				style="color: #ffffff;"> <i class="fas fa-motorcycle"></i>&nbsp;<spring:message code="menuSuperior.motos" />
+			</a></li>
+		</ul>
+	</div>
+	<div class="nav-item dropdown"> <a class="nav-link dropdown-toggle"
+		href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+		aria-haspopup="true" aria-expanded="false"> <img alt="castellano"
+		src="imagenes/${pagina.getIdioma()}.png" class="rounded-circle"
+		style="width: 50px; height: 50px">
+	</a>
+	<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		<a class="dropdown-item"
+			href="${pagina.getPaginaActiva()}?language=es"> <img
+			alt="castellano" src="imagenes/es.png" class="rounded-circle"
+			style="width: 50px; height: 50px">Es
+
+		</a> <a class="dropdown-item"
+			href="${pagina.getPaginaActiva()}?language=ca"> <img
+			alt="valencia" src="imagenes/ca.png" class="rounded-circle"
+			style="width: 50px; height: 50px">Va
+		</a>
+		<div class="dropdown-divider"></div>
+		<a class="dropdown-item  text-danger"
+			href="${pagina.getPaginaActiva()}?language=en"> <img
+			alt="english" src="imagenes/en.png" class="rounded-circle"
+			style="width: 50px; height: 50px">En
+		</a>
+		<div class="dropdown-divider"></div>
+		<a class="dropdown-item  text-danger"
+			href="${pagina.getPaginaActiva()}?language=ru"> <img
+			alt="english" src="imagenes/ru.png" class="rounded-circle"
+			style="width: 50px; height: 50px">Ru
+		</a>
+	</div>
+
+	
+	</div>
+
 </nav>

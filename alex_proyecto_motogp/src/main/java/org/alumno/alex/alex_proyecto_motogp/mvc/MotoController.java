@@ -6,6 +6,7 @@ import org.alumno.alex.alex_proyecto_motogp.model.ram.FiltroMoto;
 import org.alumno.alex.alex_proyecto_motogp.model.ram.Moto;
 import org.alumno.alex.alex_proyecto_motogp.model.ram.Pagina;
 import org.alumno.alex.alex_proyecto_motogp.srv.FileService;
+import org.alumno.alex.alex_proyecto_motogp.srv.I18nService;
 import org.alumno.alex.alex_proyecto_motogp.srv.MotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -32,6 +33,8 @@ public class MotoController {
 	MotoService motoService;
 	@Autowired
 	FileService fileService;
+	@Autowired
+	I18nService i18nService;
 	
 	Pagina pagina = new Pagina("Motos", "list-motos");
 	@GetMapping("list-motos")
@@ -40,6 +43,7 @@ public class MotoController {
 			model.addAttribute("listaMotos", motoService.getMotos());
 		}else 
 		//{
+		//pagina.setIdioma(i18nService.getIdioma());
 		model.addAttribute("listaMotos", motoService.ordenarPorCriterio(orden));
 		model.addAttribute("pagina", pagina);
 

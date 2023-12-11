@@ -8,7 +8,7 @@
 
         <mvc:form method="post" action="login" modelAttribute="usuario">
             <div class="form-group">
-                <mvc:label path="nickname">Introduzca usuario:</mvc:label>
+                <mvc:label path="nickname"><spring:message code="etiqueta.usuario" /></mvc:label>
                 <mvc:input path="nickname" type="text" class="form-control rounded" />
                 <div class="text-warning">
                     <mvc:errors path="nickname" />
@@ -16,14 +16,14 @@
             </div>
 
             <div class="form-group">
-                <mvc:label path="password">Introduzca contrasenya:</mvc:label>
+                <mvc:label path="password"><spring:message code="etiqueta.contrasena"/></mvc:label>
                 <mvc:password path="password" class="form-control rounded" />
                 <div class="text-warning">
                     <mvc:errors path="password" />
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-success rounded-pill"><i class="fas fa-sign-in-alt"></i> Acceder</button>
+            <button type="submit" class="btn btn-success rounded-pill"><i class="fas fa-sign-in-alt"></i> <spring:message code="boton.acceder"/></button>
         </mvc:form>
     </div>
 

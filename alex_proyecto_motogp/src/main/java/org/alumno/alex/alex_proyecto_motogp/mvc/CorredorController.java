@@ -61,7 +61,7 @@ public class CorredorController {
 	
 	public String listarCorredores(ModelMap model,  @RequestParam(name = "orden", required = false) String orden) {
 		if(orden == null) {
-			model.put("corredoresList", servicioCorredores.getCorredores());
+			model.put("corredoresList", PilotoMapper.INSTANCE.corredorToCorredorList(servicioCorredores.getCorredores()));
 		}else {
 			model.put("corredoresList", servicioCorredores.ordenarPorCriterio(orden));
 		}
@@ -211,7 +211,7 @@ public class CorredorController {
 	@GetMapping("update-piloto")
 	public String updatePiloto(@RequestParam("piloto") String numLicencia,ModelMap model) {
 		Corredor piloto = servicioCorredores.encontrarPilotoLicencia(numLicencia);
-		model.addAttribute("piloto", piloto);
+		model.addAttribute("corredorEdit", PilotoMapper.INSTANCE.corredorToCorredorEdit(piloto));
 		model.addAttribute("pagina", pagina);
 		return "update-piloto";
 	}
@@ -241,7 +241,7 @@ public class CorredorController {
 				model.put("error2", e.getMessage());
 				Corredor a = servicioCorredores.encontrarPilotoLicencia(piloto.getNumLicencia()+"");
 				PilotoMapper.INSTANCE.corredorToCorredorEdit(a);
-				model.addAttribute("piloto", a);
+				model.addAttribute("corredorEdit", a);
 				return "update-piloto";
 			}
 			return "redirect:list-corredores";
