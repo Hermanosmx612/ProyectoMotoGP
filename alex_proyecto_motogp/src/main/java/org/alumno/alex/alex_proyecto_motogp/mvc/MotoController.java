@@ -45,7 +45,7 @@ public class MotoController {
 		//{
 		//pagina.setIdioma(i18nService.getIdioma());
 		model.addAttribute("listaMotos", motoService.ordenarPorCriterio(orden));
-		model.addAttribute("pagina", pagina);
+		model.addAttribute("pagina", new Pagina("Motos", "list-motos", i18nService.getIdioma()));
 
 		
 		model.addAttribute("filtroMoto", new FiltroMoto());
