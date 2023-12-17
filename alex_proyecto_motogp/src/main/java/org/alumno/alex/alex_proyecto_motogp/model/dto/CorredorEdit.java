@@ -1,6 +1,7 @@
 package org.alumno.alex.alex_proyecto_motogp.model.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
@@ -30,6 +31,7 @@ public class CorredorEdit implements Modificable<CorredorEdit>, Serializable{
 	@Size(min = 1, max = 20, message = "Longitud incorrecta")
 	private String motoActual;
 	private String nombreFicheroConImagen;
+	private ArrayList<Integer> motoCorre;
 	private Date ts;
 	private String user;
 	

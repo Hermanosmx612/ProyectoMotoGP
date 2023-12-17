@@ -9,10 +9,12 @@ import org.alumno.alex.alex_proyecto_motogp.model.dto.CorredorEdit;
 import org.alumno.alex.alex_proyecto_motogp.model.ram.Corredor;
 import org.alumno.alex.alex_proyecto_motogp.model.ram.FiltroPiloto;
 import org.alumno.alex.alex_proyecto_motogp.model.ram.ImagenPiloto;
+import org.alumno.alex.alex_proyecto_motogp.model.ram.Moto;
 import org.alumno.alex.alex_proyecto_motogp.model.ram.Pagina;
 import org.alumno.alex.alex_proyecto_motogp.srv.CorredorService;
 import org.alumno.alex.alex_proyecto_motogp.srv.FileService;
 import org.alumno.alex.alex_proyecto_motogp.srv.I18nService;
+import org.alumno.alex.alex_proyecto_motogp.srv.MotoService;
 import org.alumno.alex.alex_proyecto_motogp.srv.excepciones.PilotoDuplicadoException;
 import org.alumno.alex.alex_proyecto_motogp.srv.mapper.PilotoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +50,8 @@ public class CorredorController {
 	FileService fileService;
 	@Autowired
 	I18nService i18nService;
+	@Autowired
+	MotoService servicioMotos;
 	
 	Pagina pagina = new Pagina("Pilotos", "list-corredores");
 	
@@ -167,6 +171,11 @@ public class CorredorController {
 		return "add-piloto";
 	}
 	
+	@ModelAttribute("motoLista")
+	public List<Moto> getMotos() {
+		return servicioMotos.getMotos();
+	}
+	
 	@ModelAttribute("listaFisico")
 	public List<String> getEstadoFisico() {
 //		List<String> i18nlista = i18nService.getTraduccion(servicioAlumno.listGeneros());
@@ -211,6 +220,7 @@ public class CorredorController {
 	@GetMapping("update-piloto")
 	public String updatePiloto(@RequestParam("piloto") String numLicencia,ModelMap model) {
 		Corredor piloto = servicioCorredores.encontrarPilotoLicencia(numLicencia);
+		System.out.println("Id motos: " + piloto.getMotoCorre());
 		model.addAttribute("corredorEdit", PilotoMapper.INSTANCE.corredorToCorredorEdit(piloto));
 		model.addAttribute("pagina", pagina);
 		return "update-piloto";

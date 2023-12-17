@@ -53,6 +53,8 @@
 					<td>${moto.anoFundacion}</td>
 					<td><a class="btn btn-danger"
 						href="del-moto?idMoto=${moto.id}"><i class="fas fa-trash-alt"></i>&nbsp;<spring:message code="boton.borrar" /></a></td>
+						<td><a class="btn btn-success"
+						href="info-moto?idMoto=${moto.id}"><i class="fas fa-user"></i>&nbsp;<spring:message code="boton.pilotos" /></a></td>
 				</tr>
 			</c:forEach>
 			

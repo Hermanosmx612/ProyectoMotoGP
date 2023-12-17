@@ -1,5 +1,6 @@
 package org.alumno.alex.alex_proyecto_motogp.model.ram;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
@@ -30,6 +31,7 @@ public class Corredor implements Modificable{
 	private String estadoFisico;
 	@Size(min = 1, max = 20, message = "Longitud incorrecta")
 	private String motoActual;
+	private ArrayList<Integer> motoCorre;
 	private String nombreFicheroConImagen;
 	private Date ts;
 	private String user; 
@@ -53,6 +55,7 @@ public class Corredor implements Modificable{
 		this.equipo = equipo;
 		this.nacionalidad = nacionalidad;
 		nombreFicheroConImagen = nombrefichero;
+		this.motoCorre = new ArrayList<Integer>();
 	}
 
 	

@@ -65,6 +65,17 @@
 			</div>
 			<mvc:hidden path="nombreFicheroConImagen"/>
 		</div>
+		<div class="col">
+
+				<mvc:label path="motoCorre">Moto:<%-- <spring:message code="etiqueta.matriculado" /> --%>:</mvc:label>
+				<br>
+				<mvc:select path="motoCorre">
+					<mvc:options items="${motoLista}" itemValue="id"
+						itemLabel="nombre"></mvc:options>
+				</mvc:select>
+
+
+			</div>
 		<input type="submit" path="A�adir" class='btn btn-success' />
 		<mvc:hidden path="user"/>
 		<mvc:hidden path="ts"/>

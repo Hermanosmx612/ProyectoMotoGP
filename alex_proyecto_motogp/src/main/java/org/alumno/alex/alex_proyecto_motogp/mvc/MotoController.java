@@ -1,13 +1,19 @@
 package org.alumno.alex.alex_proyecto_motogp.mvc;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import org.alumno.alex.alex_proyecto_motogp.model.dto.CorredorList;
+import org.alumno.alex.alex_proyecto_motogp.model.dto.PilotoMoto;
+import org.alumno.alex.alex_proyecto_motogp.model.ram.Corredor;
 import org.alumno.alex.alex_proyecto_motogp.model.ram.FiltroMoto;
 import org.alumno.alex.alex_proyecto_motogp.model.ram.Moto;
 import org.alumno.alex.alex_proyecto_motogp.model.ram.Pagina;
+import org.alumno.alex.alex_proyecto_motogp.srv.CorredorService;
 import org.alumno.alex.alex_proyecto_motogp.srv.FileService;
 import org.alumno.alex.alex_proyecto_motogp.srv.I18nService;
 import org.alumno.alex.alex_proyecto_motogp.srv.MotoService;
+import org.alumno.alex.alex_proyecto_motogp.srv.mapper.MotoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpStatus;
@@ -35,6 +41,8 @@ public class MotoController {
 	FileService fileService;
 	@Autowired
 	I18nService i18nService;
+	@Autowired
+	CorredorService servicioCorredor;
 	
 	Pagina pagina = new Pagina("Motos", "list-motos");
 	@GetMapping("list-motos")
@@ -147,5 +155,37 @@ public class MotoController {
 		model.put("listaMotos", motoService.listaMotos(filtroMoto.getCampo(), filtroMoto.getValor()));
 		model.addAttribute("filtroPiloto", filtroMoto);
 		return "list-motos";
+	}
+	
+	
+	@GetMapping("info-moto")
+	public String infoMotosPilotos(ModelMap model, @RequestParam(name = "idMoto", required = false) String idMoto) {
+		List<CorredorList> actuales = servicioCorredor.encontrarMotosActuales(idMoto);
+		List<CorredorList> noActuales = servicioCorredor.encontrarMotosNoActuales(idMoto);
+		model.addAttribute("pilotoMoto", new PilotoMoto(Integer.parseInt(idMoto)));
+		model.addAttribute("moto",MotoMapper.INSTANCE.motoToMotoInfo(motoService.encontrarMotoPorId(idMoto)));
+		model.addAttribute("pilotosActuales", actuales);
+		model.addAttribute("pilotosNoActuales", motoService.listarPilotosNoActuales(noActuales));
+
+		return "listMotoPilotos";
+	}
+	
+	
+	@GetMapping("del-pilotoMoto")
+	public String borrarPiloto(ModelMap model, @RequestParam("idMoto") String idMoto, @RequestParam("numLicencia") String numLicencia) {
+		System.out.println(idMoto);
+		System.out.println(numLicencia);
+		servicioCorredor.deletePilotTeam(idMoto, numLicencia);
+		return "redirect:info-moto?idMoto="+idMoto;
+	}
+	
+	@PostMapping("addPilto-moto")
+	public String addPilotoMoto(ModelMap model, PilotoMoto p) {
+		ArrayList<Integer> matriculadoEn = new ArrayList<Integer>();
+		Corredor p2 = servicioCorredor.encontrarPilotoLicencia(p.getNumLicencia()+"");
+		matriculadoEn = p2.getMotoCorre();
+		matriculadoEn.add(p.getIdMoto());
+		p2.setMotoCorre(matriculadoEn);
+		return "redirect:info-moto?idMoto="+p.getIdMoto();
 	}
 	}

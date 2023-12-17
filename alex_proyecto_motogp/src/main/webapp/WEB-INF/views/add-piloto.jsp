@@ -63,6 +63,21 @@
 				<mvc:errors path="motoActual" cssClass="text-warning"></mvc:errors>
 
 			</div>
+			
+			<div class="col">
+
+				<mvc:label path="motoCorre">Moto:<%-- <spring:message code="etiqueta.matriculado" /> --%>:</mvc:label>
+				<br>
+				<mvc:select path="motoCorre">
+
+
+					<mvc:options items="${motoLista}" itemValue="id"
+						itemLabel="nombre"></mvc:options>
+
+				</mvc:select>
+
+
+			</div>
 			<mvc:hidden path="nombreFicheroConImagen"/>
 		</div>
 		<input type="submit" path="A�adir" class='btn btn-success' />
